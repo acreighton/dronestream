@@ -1,4 +1,7 @@
 import React from 'react';
-import App from './App';
+import ChartApp from './ChartApp';
 
-React.render(<App />, document.getElementById('root'));
+React.render(
+    <ChartApp />,
+    document.getElementById('root')
+);
