@@ -74,7 +74,7 @@ var BarChart = React.createClass({
         point.enter().append('rect')
             .attr('class', 'bar')
             .attr('r', 3.5)
-            .attr('fill', 'blue')
+            .attr('fill', '#2fe2bf')
             .attr('width', '20px')
             .attr("x", function(d) { return xScale(d) + 60; })
             .attr('y', function(countryKey) {
@@ -87,7 +87,7 @@ var BarChart = React.createClass({
         point.enter().append('rect')
             .attr('class', 'bar')
             .attr('r', 3.5)
-            .attr('fill', 'pink')
+            .attr('fill', '#fd5281')
             .attr('width', '20px')
             .attr("x", function(d) { return xScale(d) + 60; })
             .attr('y', function(countryKey) {
@@ -110,7 +110,7 @@ var BarChart = React.createClass({
             .call(yAxis);
         
         var color = d3.scale.ordinal()
-            .range(["blue", "pink"])
+            .range(["#2fe2bf", "#fd5281"])
             .domain(["Minimum total deaths", "Maximum total deaths"]);
         
         var legend = barChart.selectAll(".legend")

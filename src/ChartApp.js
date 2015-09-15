@@ -11,6 +11,14 @@ var ChartApp = React.createClass({
         }
     },
     componentDidMount: function() {
+        var $loading = $('.fa.fa-spinner').hide();
+        $(document)
+            .ajaxStart(function () {
+                $loading.show();
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+            });
         $.ajax({
             url: this.props.source,
             dataType: "jsonp",

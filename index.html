@@ -3,11 +3,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>dronestre.am Data Visualization</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <style media="screen">
+            .fa-spinner {
+                color: #2fe2bf;
+                font-size: 20px;
+                left: 50%;
+                position: absolute;
+                top: 50%;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
             <h1>dronestre.am</h1>
-            <div id="root"></div>
+            <div id="root">
+            </div>
+            <i class="fa fa-spinner fa-pulse"></i>
         </div>
         <script src="/static/bundle.js"></script>
     </body>
