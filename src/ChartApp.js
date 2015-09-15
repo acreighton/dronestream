@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScatterPlot from './ScatterPlot';
+import BarChart from './BarChart';
 import Navigation from './Navigation';
 
 global.$ = require('jquery');
@@ -7,7 +7,7 @@ global.$ = require('jquery');
 var ChartApp = React.createClass({
     getInitialState: function() {
         return {
-            currentView: "ScatterPlot"
+            currentView: "BarChart"
         }
     },
     componentDidMount: function() {
@@ -24,7 +24,7 @@ var ChartApp = React.createClass({
         return (
             <div>
                 <Navigation />
-                <ScatterPlot strikeData={this.state.strikes} />
+                <BarChart strikeData={this.state.strikes} />
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import d3 from 'd3';
 
-var ScatterPlot = React.createClass({
+var BarChart = React.createClass({
     render: function() {
         this.drawChart(this.props.strikeData);
         return (
@@ -31,16 +31,16 @@ var ScatterPlot = React.createClass({
         var margin = 15,
             width = (1170 - margin * 2) / 2,
             height = 600 - margin * 2,
-            totalFatalities, country, scatterPlot;
+            totalFatalities, country, barChart;
         
-        scatterPlot = d3.select('#chart')
+        barChart = d3.select('#chart')
             .append('svg')
             .attr('style', 'overflow: visible')
             .attr('preserveAspectRatio', 'xMidYMid')
             .attr('width', width + margin * 2)
             .attr('height', height + margin * 4);
         
-        scatterPlot.append('g')
+        barChart.append('g')
             .attr('class', 'bars')
             .attr("transform", "translate(" + (margin * 4)+ ", " + margin + ")");
             
@@ -66,7 +66,7 @@ var ScatterPlot = React.createClass({
             .tickFormat(function(d) { return d; })
             .orient("bottom");
             
-        var g = scatterPlot.selectAll('.bars');
+        var g = barChart.selectAll('.bars');
         
         var point = g.selectAll('.bar')
             .data(d3.keys(deathsByCountry));
@@ -108,8 +108,31 @@ var ScatterPlot = React.createClass({
         g.append("g")
             .attr("class", "y axis")
             .call(yAxis);
+        
+        var color = d3.scale.ordinal()
+            .range(["blue", "pink"])
+            .domain(["Minimum total deaths", "Maximum total deaths"]);
+        
+        var legend = barChart.selectAll(".legend")
+              .data(color.domain().slice().reverse())
+            .enter().append("g")
+              .attr("class", "legend")
+              .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+          legend.append("rect")
+              .attr("x", width - 18)
+              .attr("width", 18)
+              .attr("height", 18)
+              .style("fill", color);
+
+          legend.append("text")
+              .attr("x", width - 24)
+              .attr("y", 9)
+              .attr("dy", ".35em")
+              .style("text-anchor", "end")
+              .text(function(d) { return d; });
     }
 });
 
 
-module.exports = ScatterPlot;
+module.exports = BarChart;
