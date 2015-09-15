@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BarChart from './BarChart';
+import WorldMap from './WorldMap';
 import Navigation from './Navigation';
 
 global.$ = require('jquery');
@@ -33,6 +34,7 @@ var ChartApp = React.createClass({
             <div>
                 <Navigation />
                 <BarChart strikeData={this.state.strikes} />
+                <WorldMap strikeData={this.state.strikes} />
             </div>
         );
     }
