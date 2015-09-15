@@ -8,14 +8,12 @@ var ScatterPlot = React.createClass({
             <div id="chart"></div>
         );
     },
-    formatJSON: function(strikeData) {
-        var deathsByCountry = [];
+    formatData: function(strikeData) {
         var countries = {},
             currentCountry;
         for (var i = 0; i < strikeData.length; i++) {
             currentCountry = strikeData[i].country;
             
-            // Add country to object if it's not already there
             if (!countries.hasOwnProperty(currentCountry)) {
                 countries[currentCountry] = {deaths_min: null, deaths_max: null};
             }
@@ -28,7 +26,7 @@ var ScatterPlot = React.createClass({
     drawChart: function(strikeData) {
         if (!strikeData) {return;};
         
-        var deathsByCountry = this.formatJSON(strikeData);
+        var deathsByCountry = this.formatData(strikeData);
         
         var margin = 15,
             width = (1170 - margin * 2) / 2,
@@ -37,13 +35,13 @@ var ScatterPlot = React.createClass({
         
         scatterPlot = d3.select('#chart')
             .append('svg')
-            // .attr('viewBox', '0 0 960 500')
+            .attr('style', 'overflow: visible')
             .attr('preserveAspectRatio', 'xMidYMid')
             .attr('width', width + margin * 2)
-            .attr('height', height + margin * 2);
+            .attr('height', height + margin * 4);
         
         scatterPlot.append('g')
-            .attr('class', 'points')
+            .attr('class', 'bars')
             .attr("transform", "translate(" + (margin * 4)+ ", " + margin + ")");
             
         var yDomain = d3.max(d3.values(deathsByCountry), function(item) {
@@ -56,7 +54,7 @@ var ScatterPlot = React.createClass({
         
         var xScale = d3.scale.ordinal()
             .domain(d3.keys(deathsByCountry))
-            .rangePoints([0, height]);
+            .rangeRoundBands([0, width]);
         
         var yAxis = d3.svg.axis()
             .scale(yScale)
@@ -68,32 +66,35 @@ var ScatterPlot = React.createClass({
             .tickFormat(function(d) { return d; })
             .orient("bottom");
             
-        var g = scatterPlot.selectAll('.points');
+        var g = scatterPlot.selectAll('.bars');
         
-        var point = g.selectAll('.point')
+        var point = g.selectAll('.bar')
             .data(d3.keys(deathsByCountry));
         
-        point.enter().append('circle')
-            .attr('class', 'point')
+        point.enter().append('rect')
+            .attr('class', 'bar')
             .attr('r', 3.5)
             .attr('fill', 'blue')
-            .attr('cx', function(countryKey) {
-                console.log(countryKey);
-                return xScale(countryKey);
-            })
-            .attr('cy', function(countryKey) {
+            .attr('width', '20px')
+            .attr("x", function(d) { return xScale(d) + 60; })
+            .attr('y', function(countryKey) {
                 return yScale(deathsByCountry[countryKey].deaths_min);
+            })
+            .attr('height', function(countryKey) {
+                return height - yScale(deathsByCountry[countryKey].deaths_min) ;
             });
         
-        point.enter().append('circle')
-            .attr('class', 'point')
+        point.enter().append('rect')
+            .attr('class', 'bar')
             .attr('r', 3.5)
             .attr('fill', 'pink')
-            .attr('cx', function(countryKey) {
-                return xScale(countryKey);
-            })
-            .attr('cy', function(countryKey) {
+            .attr('width', '20px')
+            .attr("x", function(d) { return xScale(d) + 60; })
+            .attr('y', function(countryKey) {
                 return yScale(deathsByCountry[countryKey].deaths_max);
+            })
+            .attr('height', function(countryKey) {
+                return height - yScale(deathsByCountry[countryKey].deaths_max - deathsByCountry[countryKey].deaths_min) ;
             });
         
         point.exit()
