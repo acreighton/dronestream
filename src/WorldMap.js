@@ -19,7 +19,7 @@ var WorldMap = React.createClass({
             colors = this.assignColors(),
             geoJson = require("json!./json/world.json"),
             width = 960,
-            height = 500;
+            height = 600;
             
         var svg = d3.select('#map')
             .append('svg')
@@ -27,8 +27,8 @@ var WorldMap = React.createClass({
             .attr('height', height);
             
         var projection = d3.geo.equirectangular()
-            .scale(600)
-            .translate([-200, 450])
+            .scale(800)
+            .translate([-280, 550])
             .precision(.1);
 
         var path = d3.geo.path()
