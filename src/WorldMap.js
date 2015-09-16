@@ -17,7 +17,7 @@ var WorldMap = React.createClass({
         
         var strikeData = this.props.strikeData,
             colors = this.assignColors,
-            geoJson = require("json!./json/world.json"),
+            geoJson = require("./json/world.json"),
             width = 960,
             height = 580;
             
