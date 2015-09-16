@@ -3,7 +3,7 @@ import d3 from 'd3';
 import topojson from 'topojson';
 
 var WorldMap = React.createClass({
-    assignColors: function() {
+    assignColors: (function() {
         var years = {2004: '',2005: '',2006: '',2007: '',2008: '',2009: '',2010: '',2011: '',2012: '',2013: '',2014: '',2015: ''};
         
         for (var i in years) {
@@ -11,12 +11,12 @@ var WorldMap = React.createClass({
         }
         
         return years;
-    },
+    })(),
     drawMap: function() {
         if (!this.props.strikeData) {return;};
         
         var strikeData = this.props.strikeData,
-            colors = this.assignColors(),
+            colors = this.assignColors,
             geoJson = require("json!./json/world.json"),
             width = 960,
             height = 600;
