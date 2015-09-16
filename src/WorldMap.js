@@ -19,7 +19,7 @@ var WorldMap = React.createClass({
             colors = this.assignColors,
             geoJson = require("json!./json/world.json"),
             width = 960,
-            height = 600;
+            height = 580;
             
         var svg = d3.select('#map')
             .append('svg')

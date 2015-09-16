@@ -32,7 +32,7 @@ var BarChart = React.createClass({
         
         var margin = 15,
             width = (1170 - margin * 2) / 2,
-            height = 600 - margin * 2,
+            height = 500 - margin * 2,
             totalFatalities, country, barChart;
         
         barChart = d3.select('#chart')
