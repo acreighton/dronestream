@@ -5,6 +5,8 @@ import Navigation from './Navigation';
 
 global.$ = require('jquery');
 
+require('./sass/style.scss');
+
 var ChartApp = React.createClass({
     getInitialState: function() {
         return {

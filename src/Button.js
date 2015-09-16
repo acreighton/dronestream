@@ -15,7 +15,6 @@ var Button = React.createClass({
         $(document).trigger('currentView', [self.props.name]);
     },
     render: function() {
-        var classNames = require('classnames');
         return (
             <button onClick={this.onClick} className={this.props.current ? 'btn btn-primary' : 'btn'}>{this.props.displayName}</button>
         );
