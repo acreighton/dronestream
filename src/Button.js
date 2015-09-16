@@ -16,7 +16,9 @@ var Button = React.createClass({
     },
     render: function() {
         return (
+            /*jshint ignore:start */
             <button onClick={this.onClick} className={this.props.current ? 'btn btn-primary' : 'btn'}>{this.props.displayName}</button>
+            /*jshint ignore:end */
         );
     }
 });

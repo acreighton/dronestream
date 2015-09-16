@@ -7,7 +7,9 @@ var BarChart = React.createClass({
     },
     render: function() {
         return (
+            /*jshint ignore:start */
             <div id="chart"></div>
+            /*jshint ignore:end */
         );
     },
     formatData: function(strikeData) {
@@ -26,7 +28,7 @@ var BarChart = React.createClass({
         return countries;
     },
     drawChart: function() {
-        if (!this.props.strikeData) {return;};
+        if (!this.props.strikeData) {return;}
         
         var deathsByCountry = this.formatData(this.props.strikeData);
         

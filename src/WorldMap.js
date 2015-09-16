@@ -29,7 +29,7 @@ var WorldMap = React.createClass({
         var projection = d3.geo.equirectangular()
             .scale(800)
             .translate([-280, 550])
-            .precision(.1);
+            .precision(.1); //jshint ignore:line
 
         var path = d3.geo.path()
             .projection(projection);
@@ -95,7 +95,9 @@ var WorldMap = React.createClass({
     },
     render: function() {
         return (
+            /*jshint ignore:start */
             <div id="map"></div>
+            /*jshint ignore:end */
         );
     }
 });

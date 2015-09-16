@@ -38,6 +38,7 @@ var ChartApp = React.createClass({
         });
     },
     render: function() {
+        /*jshint ignore:start */
         return (
             <div>
                 <Navigation currentView={this.state.currentView}/>
@@ -45,6 +46,7 @@ var ChartApp = React.createClass({
                 {this.state.currentView == 'WorldMap' ? <WorldMap strikeData={this.state.strikes} /> : null}
             </div>
         );
+        /*jshint ignore:end */
     }
 });
 
