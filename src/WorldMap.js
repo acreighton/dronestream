@@ -13,7 +13,7 @@ var WorldMap = React.createClass({
         return years;
     })(),
     drawMap: function() {
-        if (!this.props.strikeData) {return;};
+        if (!this.props.strikeData) {return;}
         
         var strikeData = this.props.strikeData,
             colors = this.assignColors,

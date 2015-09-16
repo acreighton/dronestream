@@ -4,7 +4,7 @@ var Button = React.createClass({
     getInitialState: function() {
         return {
             name: this.props.name,
-        }
+        };
     },
     onClick: function(e) {
         var self = this;

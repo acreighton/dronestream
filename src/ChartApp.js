@@ -12,7 +12,7 @@ var ChartApp = React.createClass({
         return {
             strikes: null,
             currentView: null
-        }
+        };
     },
     componentDidMount: function() {
         var $loading = $('.fa.fa-spinner').hide(),
