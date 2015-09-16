@@ -8,11 +8,13 @@ global.$ = require('jquery');
 var ChartApp = React.createClass({
     getInitialState: function() {
         return {
-            currentView: "BarChart"
+            strikes: null,
+            currentView: null
         }
     },
     componentDidMount: function() {
-        var $loading = $('.fa.fa-spinner').hide();
+        var $loading = $('.fa.fa-spinner').hide(),
+            self = this;
         $(document)
             .ajaxStart(function () {
                 $loading.show();
@@ -25,16 +27,20 @@ var ChartApp = React.createClass({
             dataType: "jsonp",
             context: this,
             success: function(data) {
-                this.setState({strikes: data.strike});
+                this.setState({strikes: data.strike, currentView: 'BarChart'});
             }
+        });
+        
+        $(document).on('currentView', function(e, data) {
+            self.setState({currentView: data});
         });
     },
     render: function() {
         return (
             <div>
-                <Navigation />
-                <BarChart strikeData={this.state.strikes} />
-                <WorldMap strikeData={this.state.strikes} />
+                <Navigation currentView={this.state.currentView}/>
+                {this.state.currentView == 'BarChart' ? <BarChart strikeData={this.state.strikes} /> : null}
+                {this.state.currentView == 'WorldMap' ? <WorldMap strikeData={this.state.strikes} /> : null}
             </div>
         );
     }

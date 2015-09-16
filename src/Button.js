@@ -4,19 +4,20 @@ var Button = React.createClass({
     getInitialState: function() {
         return {
             name: this.props.name,
-            current: false
         }
     },
     onClick: function(e) {
+        var self = this;
+        
         e.preventDefault();
         this.setState({current: true});
         
-        // $(this).trigger('currentView', this.props.name);
-        // this.setState
+        $(document).trigger('currentView', [self.props.name]);
     },
     render: function() {
+        var classNames = require('classnames');
         return (
-            <button onClick={this.onClick} className="btn">{this.props.displayName}</button>
+            <button onClick={this.onClick} className={this.props.current ? 'btn btn-primary' : 'btn'}>{this.props.displayName}</button>
         );
     }
 });

@@ -14,19 +14,18 @@ var WorldMap = React.createClass({
     },
     drawMap: function() {
         if (!this.props.strikeData) {return;};
+        
         var strikeData = this.props.strikeData,
-            colors = this.assignColors();
-        
-        var geoJson = require("json!./json/world.json");
-        
-        var width = 960,
+            colors = this.assignColors(),
+            geoJson = require("json!./json/world.json"),
+            width = 960,
             height = 500;
             
         var svg = d3.select('#map')
             .append('svg')
             .attr('width', width)
             .attr('height', height);
-        
+            
         var projection = d3.geo.equirectangular()
             .scale(600)
             .translate([-200, 450])
@@ -75,7 +74,7 @@ var WorldMap = React.createClass({
               .data(legendColor.domain().slice().reverse())
             .enter().append("g")
               .attr("class", "legend")
-              .attr("transform", function(d, i) { console.log(i); return "translate(-40," + (i * 20 + 20) + ")"; });
+              .attr("transform", function(d, i) { return "translate(-40," + (i * 20 + 20) + ")"; });
 
           legend.append("rect")
               .attr("x", width - 18)
@@ -86,13 +85,15 @@ var WorldMap = React.createClass({
           legend.append("text")
               .attr("x", width - 24)
               .attr("y", 9)
-              .attr("dy", ".35em")
               .style("text-anchor", "end")
               .style("fill", "#fff")
               .text(function(d) { return d; });
+        
+    },
+    componentDidMount: function() {
+        this.drawMap();
     },
     render: function() {
-        this.drawMap();
         return (
             <div id="map"></div>
         );

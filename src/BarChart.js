@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import d3 from 'd3';
 
 var BarChart = React.createClass({
+    componentDidMount: function() {
+        this.drawChart();
+    },
     render: function() {
-        this.drawChart(this.props.strikeData);
         return (
             <div id="chart"></div>
         );
@@ -23,10 +25,10 @@ var BarChart = React.createClass({
         }
         return countries;
     },
-    drawChart: function(strikeData) {
-        if (!strikeData) {return;};
+    drawChart: function() {
+        if (!this.props.strikeData) {return;};
         
-        var deathsByCountry = this.formatData(strikeData);
+        var deathsByCountry = this.formatData(this.props.strikeData);
         
         var margin = 15,
             width = (1170 - margin * 2) / 2,
